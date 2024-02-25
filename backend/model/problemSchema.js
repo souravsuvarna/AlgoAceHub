@@ -13,18 +13,4 @@ const mainSchema = new Schema({
   jsonArray: [jsonSchema],
 });
 
-// Custom middleware to check for duplicate keys before saving
-// mainSchema.pre("save", function (next) {
-//   const keys = new Set();
-//   for (const item of this.jsonArray) {
-//     if (keys.has(item.key)) {
-//       const err = new Error("Duplicate key found in jsonArray");
-//       return next(err);
-//     }
-//     keys.add(item.key);
-//   }
-//   next();
-// });
-
-
 module.exports =  mongoose.model("problemSchema", mainSchema);

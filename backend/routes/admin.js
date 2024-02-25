@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const MainModel = require("../model/problemSchema");
+router.use(express.json());
 
 //Update Existing
 router.get("/", async (req, res) => {
@@ -39,6 +40,49 @@ router.get("/", async (req, res) => {
   } finally {
     // Close the database connection
     mongoose.connection.close();
+  }
+});
+
+
+router.post("/add", async (req, res) => {
+  // Access data from the JSON request body
+  const data = req.body;
+  console.log(data.cat);
+  console.log(data.id);
+  console.log(data.link);
+
+  try {
+    const existingRecord = await MainModel.findOne({ name: data.cat });
+
+    if (existingRecord) {
+      // Check if the jsonArray already has an object with the specified data.id
+      const existingObject = existingRecord.jsonArray.find(item => item.key === data.id);
+
+      if (existingObject) {
+        // If the object exists, update its value
+        existingObject.value = data.link;
+      } else {
+        // If the object doesn't exist, append a new one to the jsonArray
+        existingRecord.jsonArray.push({ key: data.id, value: data.link });
+      }
+
+      // Save the changes to the database
+      await existingRecord.save();
+    } else {
+      // If the record doesn't exist, create a new one
+      const newRecord = new MainModel({
+        name: data.cat,
+        jsonArray: [{ key: data.id, value: data.link }],
+      });
+
+      // Save the new record to the database
+      await newRecord.save();
+    }
+
+    res.json({ message: 'Record updated/created successfully' });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
