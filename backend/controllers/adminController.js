@@ -3,11 +3,10 @@ const MainModel = require("../model/problemSchema");
 
 //Add or Update a Problem
 async function addProblem(req, res) {
-  // Access data from the JSON request body
   const data = req.body;
-  console.log(data.category);
-  console.log(data.id);
-  console.log(data.link);
+  // console.log(data.category);
+  // console.log(data.id);
+  // console.log(data.link);
 
   try {
     const existingRecord = await MainModel.findOne({ name: data.category });
@@ -19,7 +18,6 @@ async function addProblem(req, res) {
       );
 
       if (existingObject) {
-        // If the object exists, update its value
         existingObject.value = data.link;
       } else {
         // If the object doesn't exist, append a new one to the jsonArray
@@ -31,7 +29,7 @@ async function addProblem(req, res) {
     } else {
       // If the record doesn't exist, create a new one
       const newRecord = new MainModel({
-        name: data.cat,
+        name: data.category,
         jsonArray: [{ key: data.id, value: data.link }],
       });
 
@@ -55,7 +53,7 @@ async function getByCategory(req, res) {
       return res.status(404).json({ error: "Not Found" });
     }
 
-    // Extract relevant data from the record (modify as needed)
+    // Extract relevant data from the record 
     const responseData = {
       name: existingRecord.name,
       jsonArray: existingRecord.jsonArray,
@@ -87,7 +85,6 @@ async function getById(req, res) {
         };
         return res.json(responseData);
       }
-
     }
 
     return res.status(404).json({ error: "Not Found" });
