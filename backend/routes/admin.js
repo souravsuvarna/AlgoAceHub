@@ -3,6 +3,7 @@ const {
   addProblem,
   getByCategory,
   getById,
+  deleteById,
 } = require("../controllers/adminController");
 const router = express.Router();
 
@@ -15,4 +16,7 @@ router.get("/getByCategory", getByCategory);
 //Route to Get a problem by its id
 router.get("/getById", getById);
 
+//Route to Delete a problem by its id
+
+router.delete("/deleteById", deleteById);
 module.exports = router;
