@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
 
 mongoose.connect(process.env.MONGO_URI);
 
-
+app.use(express.json());
 app.use("/admin", require("./routes/admin"));
 app.use("/api/prob", require("./routes/api"));
 
