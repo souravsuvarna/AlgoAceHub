@@ -4,19 +4,25 @@ const {
   getByCategory,
   getById,
   deleteById,
+  adminLogin,
 } = require("../controllers/adminController");
+
+const { authenticateAdmin } = require("../middlewares/authenticateAdmin");
 const router = express.Router();
 
+router.post("/login", adminLogin);
+
 //Route to Add or update a problem
-router.post("/addProblem", addProblem);
+router.post("/addProblem", authenticateAdmin, addProblem);
 
 //Route to Get All problems by category
-router.get("/getByCategory", getByCategory);
+router.get("/getByCategory", authenticateAdmin, getByCategory);
 
 //Route to Get a problem by its id
-router.get("/getById", getById);
+router.get("/getById", authenticateAdmin, getById);
 
 //Route to Delete a problem by its id
 
-router.delete("/deleteById", deleteById);
+router.delete("/deleteById", authenticateAdmin, deleteById);
+
 module.exports = router;

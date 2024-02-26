@@ -1,4 +1,32 @@
 const MainModel = require("../model/problemSchema");
+const jwt = require("jsonwebtoken");
+const config = require("../config");
+
+//Login Credentials
+const adminCredentials = {
+  username: config.username,
+  password: config.password,
+};
+
+// Secret key for JWT
+const secretKey = config.secretKey;
+
+//AdminLogin
+const adminLogin = async (req, res) => {
+  const { username, password } = req.body;
+  // console.log(username);
+  // console.log(password);
+  if (
+    username === adminCredentials.username &&
+    password === adminCredentials.password
+  ) {
+    const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
+    return res.json({ token });
+  } else {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+};
+
 
 //Add or Update a Problem
 const addProblem = async (req, res) => {
@@ -143,4 +171,5 @@ module.exports = {
   getByCategory,
   getById,
   deleteById,
+  adminLogin,
 };
