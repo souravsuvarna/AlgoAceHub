@@ -1,7 +1,7 @@
 const MainModel = require("../model/problemSchema");
 
 //Add or Update a Problem
-async function addProblem(req, res) {
+const addProblem = async (req, res) => {
   const data = req.body;
   // console.log(data.category);
   // console.log(data.id);
@@ -41,10 +41,10 @@ async function addProblem(req, res) {
     console.log(error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
 
 //Get All Problems By Category
-async function getByCategory(req, res) {
+const getByCategory = async (req, res) => {
   const data = req.body;
   try {
     const existingRecord = await MainModel.findOne({ name: data.category });
@@ -64,10 +64,10 @@ async function getByCategory(req, res) {
     console.error(error.message);
     res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
 
 //Get A Problem By its id
-async function getById(req, res) {
+const getById = async (req, res) => {
   const data = req.body;
   try {
     //Get All Records
@@ -95,10 +95,10 @@ async function getById(req, res) {
     console.log(error.message);
     res.status(505);
   }
-}
+};
 
 //Delete A problem By its id
-async function deleteById(req, res) {
+const deleteById = async (req, res) => {
   const data = req.body;
   try {
     //Get All Records
@@ -135,7 +135,9 @@ async function deleteById(req, res) {
     console.log(error.message);
     res.status(505);
   }
-}
+};
+
+
 module.exports = {
   addProblem,
   getByCategory,
