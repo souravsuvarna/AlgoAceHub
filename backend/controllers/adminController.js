@@ -27,16 +27,18 @@ const adminLogin = async (req, res) => {
   }
 };
 
-
 //Add or Update a Problem
 const addProblem = async (req, res) => {
   const data = req.body;
   // console.log(data.category);
   // console.log(data.id);
   // console.log(data.link);
-
+  // console.log(data.platform); //FIXME - Remove Comments
   try {
-    const existingRecord = await MainModel.findOne({ name: data.category });
+    const existingRecord = await MainModel.findOne({
+      name: data.category,
+      platform: data.platform,
+    }); //NOTE - Added platform
 
     if (existingRecord) {
       // Check if the jsonArray already has an object with the specified data.id
@@ -57,6 +59,7 @@ const addProblem = async (req, res) => {
       // If the record doesn't exist, create a new one
       const newRecord = new MainModel({
         name: data.category,
+        platform: data.platform,
         jsonArray: [{ key: data.id, value: data.link }],
       });
 
@@ -75,7 +78,10 @@ const addProblem = async (req, res) => {
 const getByCategory = async (req, res) => {
   const data = req.body;
   try {
-    const existingRecord = await MainModel.findOne({ name: data.category });
+    const existingRecord = await MainModel.findOne({
+      name: data.category,
+      platform: data.platform,
+    }); //NOTE - Added platform
     if (!existingRecord) {
       return res.status(404).json({ error: "Not Found" });
     }
@@ -83,6 +89,7 @@ const getByCategory = async (req, res) => {
     // Extract relevant data from the record
     const responseData = {
       name: existingRecord.name,
+      platform: existingRecord.platform, //NOTE - Added platform
       jsonArray: existingRecord.jsonArray,
     };
 
@@ -99,7 +106,9 @@ const getById = async (req, res) => {
   const data = req.body;
   try {
     //Get All Records
-    const existingRecords = await MainModel.find();
+    const existingRecords = await MainModel.find({
+      platform: data.platform,
+    }); //NOTE - Added platform
 
     //Iterate Over each Record
     for (const record of existingRecords) {
@@ -112,6 +121,7 @@ const getById = async (req, res) => {
         // If the object with match found
         const responseData = {
           name: record.name,
+          platform: record.platform, //NOTE - Added platform
           jsonArray: existingObject,
         };
         return res.json(responseData);
@@ -130,7 +140,9 @@ const deleteById = async (req, res) => {
   const data = req.body;
   try {
     //Get All Records
-    const existingRecords = await MainModel.find();
+    const existingRecords = await MainModel.find({
+      platform: data.platform,
+    }); //NOTE - Addded platform
 
     //Iterate Over each Record
     for (const record of existingRecords) {
@@ -164,7 +176,6 @@ const deleteById = async (req, res) => {
     res.status(505);
   }
 };
-
 
 module.exports = {
   addProblem,

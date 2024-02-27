@@ -10,7 +10,8 @@ const jsonSchema = new Schema({
 // Main schema with an array of JSON subdocuments
 const mainSchema = new Schema({
   name: String,
+  platform: String, //NOTE - Added platform
   jsonArray: [jsonSchema],
 });
 
-module.exports =  mongoose.model("problemSchema", mainSchema);
+module.exports = mongoose.model("problemSchema", mainSchema);
