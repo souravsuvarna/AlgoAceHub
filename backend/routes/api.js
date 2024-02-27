@@ -1,10 +1,8 @@
 const express = require("express");
 const router = express.Router();
-
+const { getProblem } = require("../controllers/userController");
 
 //Update Existing
-router.get("/", async (req, res) => {
- res.send("Hello")
-});
+router.get("/getProblem", getProblem);
 
 module.exports = router;
