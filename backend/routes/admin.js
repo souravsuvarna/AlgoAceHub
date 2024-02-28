@@ -16,10 +16,10 @@ router.post("/login", adminLogin);
 router.post("/addProblem", authenticateAdmin, addProblem);
 
 //Route to Get All problems by category
-router.get("/getByCategory", authenticateAdmin, getByCategory);
+router.post("/getByCategory", authenticateAdmin, getByCategory);
 
 //Route to Get a problem by its id
-router.get("/getById", authenticateAdmin, getById);
+router.post("/getById", authenticateAdmin, getById);
 
 //Route to Delete a problem by its id
 

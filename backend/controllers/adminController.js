@@ -1,6 +1,6 @@
 const MainModel = require("../model/problemSchema");
 const jwt = require("jsonwebtoken");
-const config = require("../config");
+const config = require("../config/config");
 
 //Login Credentials
 const adminCredentials = {

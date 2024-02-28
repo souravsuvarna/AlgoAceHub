@@ -3,7 +3,7 @@ const router = express.Router();
 const { getProblem, stats } = require("../controllers/userController");
 
 //Route to random problem genearte
-router.get("/getProblem", getProblem);
+router.post("/getProblem", getProblem);
 
 //Route to get stats
 router.get("/stats", stats);
