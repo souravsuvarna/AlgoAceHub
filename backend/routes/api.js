@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getProblem } = require("../controllers/userController");
+const { getProblem, stats } = require("../controllers/userController");
 
-//Update Existing
+//Route to random problem genearte
 router.get("/getProblem", getProblem);
+
+//Route to get stats
+router.get("/stats", stats);
 
 module.exports = router;

@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI);
 
 app.use(express.json());
 app.use("/admin", require("./routes/admin"));
-app.use("/api/", require("./routes/api"));
+app.use("/", require("./routes/api"));
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
