@@ -12,7 +12,7 @@ const getProblem = async (req, res) => {
     // REVIEW - have to set null or all
     // Filter category optional
     if (data.category !== "all") {
-      query.name = data.category;
+      query.category = data.category;
     }
 
     // Query

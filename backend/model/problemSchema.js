@@ -9,7 +9,7 @@ const jsonSchema = new Schema({
 
 // Main schema with an array of JSON subdocuments
 const mainSchema = new Schema({
-  name: String,
+  category: String,
   platform: String, //NOTE - Added platform
   jsonArray: [jsonSchema],
 });

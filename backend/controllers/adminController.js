@@ -36,7 +36,7 @@ const addProblem = async (req, res) => {
   // console.log(data.platform); //FIXME - Remove Comments
   try {
     const existingRecord = await MainModel.findOne({
-      name: data.category,
+      category: data.category,
       platform: data.platform,
     }); //NOTE - Added platform
 
@@ -58,7 +58,7 @@ const addProblem = async (req, res) => {
     } else {
       // If the record doesn't exist, create a new one
       const newRecord = new MainModel({
-        name: data.category,
+        category: data.category,
         platform: data.platform,
         jsonArray: [{ key: data.id, value: data.link }],
       });
@@ -79,22 +79,23 @@ const getByCategory = async (req, res) => {
   const data = req.body;
   try {
     const existingRecord = await MainModel.findOne({
-      name: data.category,
+      category: data.category,
       platform: data.platform,
     }); //NOTE - Added platform
+
     if (!existingRecord) {
       return res.status(404).json({ error: "Not Found" });
     }
 
     // Extract relevant data from the record
     const responseData = {
-      name: existingRecord.name,
+      category: existingRecord.category,
       platform: existingRecord.platform, //NOTE - Added platform
       jsonArray: existingRecord.jsonArray,
     };
 
     // Send the retrieved data as a JSON response
-    res.json(responseData);
+    res.json({ jsonArray: responseData.jsonArray });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ error: "Internal Server Error" });
@@ -120,7 +121,7 @@ const getById = async (req, res) => {
       if (existingObject) {
         // If the object with match found
         const responseData = {
-          name: record.name,
+          category: record.category,
           platform: record.platform, //NOTE - Added platform
           jsonArray: existingObject,
         };
@@ -139,41 +140,41 @@ const getById = async (req, res) => {
 const deleteById = async (req, res) => {
   const data = req.body;
   try {
-    //Get All Records
-    const existingRecords = await MainModel.find({
+    // Get the matching record
+    const existingRecord = await MainModel.findOne({
       platform: data.platform,
-    }); //NOTE - Addded platform
+      category: data.category,
+    });
 
-    //Iterate Over each Record
-    for (const record of existingRecords) {
-      //Check each Record JsonArray for the id match
-      const existingObject = record.jsonArray.find(
-        (item) => item.key === data.id
-      );
-
-      if (existingObject) {
-        // If the object with match found
-        const recordId = existingObject.key;
-
-        try {
-          // Delete the object from MongoDB
-          // console.log(recordId);
-          await MainModel.updateOne({
-            $pull: { jsonArray: { key: recordId } },
-          });
-          return res.json({ message: "Success" });
-          // No need to return here, just continue with the loop
-        } catch (error) {
-          console.error("Error deleting object:", error);
-          return res.status(500).json({ message: "Internal Server Error" });
-        }
-      }
+    //Record Not found
+    if (!existingRecord) {
+      return res.status(404).json({ error: "Record Not Found" });
     }
+    //array object with match id
+    const record = existingRecord.jsonArray.find(
+      (item) => item.key === data.id
+    );
+
     //Id Not Found
-    return res.status(404).json({ error: "Not Found" });
+    if (!record) {
+      return res.status(404).json({ error: "Id Not Found" });
+    }
+    const recordId = record.key;
+
+    try {
+      // Delete the object from jsonArray
+      await MainModel.updateOne(
+        { "jsonArray.key": recordId },
+        { $pull: { jsonArray: { key: recordId } } }
+      );
+      return res.json({ message: "Success" });
+    } catch (error) {
+      console.error("Error deleting object:", error);
+      return res.status(500).json({ message: "Internal Server Error" });
+    }
   } catch (error) {
     console.log(error.message);
-    res.status(505);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
 
