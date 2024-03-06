@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { getProblem, stats } = require("../controllers/userController");
+const { getProblem, stats, home } = require("../controllers/userController");
+
+//Route to home page
+router.get("/", home);
 
 //Route to random problem genearte
 router.post("/getProblem", getProblem);

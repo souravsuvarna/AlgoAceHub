@@ -1,6 +1,10 @@
 const MainModel = require("../model/problemSchema");
 const jwt = require("jsonwebtoken");
 const config = require("../config/config");
+const express = require("express");
+const path = require("path");
+const app = express();
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 //Login Credentials
 const adminCredentials = {
@@ -178,10 +182,30 @@ const deleteById = async (req, res) => {
   }
 };
 
+//Admin Login Page
+const adminLoginPage = (req, res) => {
+  const filePath = path.join(
+    __dirname,
+    "../../frontend/static/admin/login.html"
+  );
+  res.sendFile(filePath);
+};
+
+//Admin Panel page
+const adminPanelPage = (req, res) => {
+  const filePath = path.join(
+    __dirname,
+    "../../frontend/static/admin/adminPanel.html"
+  );
+  res.sendFile(filePath);
+};
+
 module.exports = {
   addProblem,
   getByCategory,
   getById,
   deleteById,
   adminLogin,
+  adminLoginPage,
+  adminPanelPage,
 };

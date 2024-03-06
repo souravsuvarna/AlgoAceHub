@@ -1,3 +1,8 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 const MainModel = require("../model/problemSchema");
 
 //Random Problem Generator
@@ -51,7 +56,7 @@ const getProblem = async (req, res) => {
   }
 };
 
-//Problem Stats 
+//Problem Stats
 const stats = async (req, res) => {
   try {
     // Aggregation pipeline to group by platform and calculate the sum of jsonArray lengths
@@ -60,6 +65,13 @@ const stats = async (req, res) => {
         $group: {
           _id: "$platform", // Grouping by platform
           totalProblems: { $sum: { $size: "$jsonArray" } }, // Calculating the sum of jsonArray lengths
+        },
+      },
+      {
+        $project: {
+          platform: "$_id", // Rename _id to platform
+          totalProblems: 1, // Keep the totalProblems field
+          _id: 0, // Exclude the original _id field
         },
       },
     ];
@@ -81,7 +93,14 @@ const stats = async (req, res) => {
   }
 };
 
+//Route to get home Page
+const home = (req, res) => {
+  const filePath = path.join(__dirname, '../../frontend/static/user/home.html');
+  res.sendFile(filePath);
+};
+
 module.exports = {
   getProblem,
   stats,
+  home,
 };
