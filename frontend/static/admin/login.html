@@ -1,11 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Admin Here</h1>
-</body>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hello Bulma!</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <section class="hero is-primary is-fullheight">
+      <div class="hero-body" style="background-color: #2c3333">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+              <form action="" class="box" style="background-color: #cbe4de;">
+                <span class="icon-text">
+                  <span class="icon">
+                    <i class="fa-solid fa-arrow-right-to-bracket fa-2x"></i>
+                  </span>
+                  <span
+                    class="ml-3 mb-5 px-1"
+                    style="font-size: 35px; font-weight: bold"
+                    >Admin</span
+                  >
+                </span>
+                <div class="field">
+                  <label for="" class="label" style="font-size: 20px"
+                    >Email</label
+                  >
+                  <div class="control has-icons-left">
+                    <input
+                      type="text"
+                      placeholder="ID"
+                      class="input is-rounded input is-medium"
+                      required
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fa-solid fa-id-badge"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field">
+                  <label for="" class="label" style="font-size: 20px"
+                    >Password</label
+                  >
+                  <div class="control has-icons-left">
+                    <input
+                      type="password"
+                      placeholder="*******"
+                      class="input is-rounded input is-medium"
+                      required
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fa fa-lock"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="field has-text-centered">
+                  <button class="button is-success is-medium mt-2">
+                    <span class="icon is-medium">
+                      <i class="fa-solid fa-key"></i>
+                    </span>
+                    <span>Login</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
