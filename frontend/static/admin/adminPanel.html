@@ -1,11 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css"
+    />
   </head>
-  <body>
-    <h1>Admin Panel</h1>
+  <body style="background-color: #2c3333">
+    <section class="hero" style="background-color: #2c3333">
+      <div class="hero-body has-text-centered">
+        <h1
+          class="title"
+          class="ml-3 mb-5 px-1"
+          style="font-size: 50px; font-weight: bold; color: #17b7bd"
+        >
+          Welcome, Admin
+        </h1>
+      </div>
+    </section>
+
+    <main
+      class="container content box border"
+      style="background-color: #cbe4de"
+      class="mt-3"
+    >
+      <h1
+        class="title"
+        class="ml-3 mb-5 px-1"
+        style="font-size: 35px; font-weight: bold; color: #2c3333"
+      >
+        Admin Panel
+      </h1>
+
+      <form method="post" action="#">
+        <div class="columns">
+          <div class="column">
+            <div class="field">
+              <label class="label" for="method">Choose one:</label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-rounded">
+                  <select
+                    id="method"
+                    name="method"
+                    onchange="handleChange()"
+                    required
+                  >
+                    <option value="add">Add / Update</option>
+                    <option value="findById">Find By Id</option>
+                    <option value="findByCategory">Find By Category</option>
+                    <option value="delete">Delete</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="fa-regular fa-circle-check"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label class="label" for="platform">Choose a Platform:</label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-rounded">
+                  <select id="platform" name="platform" required>
+                    <option value="lc">LeetCode</option>
+                    <option value="gfg">GFG</option>
+                    <option value="cn">Coding Ninja</option>
+                    <option value="ib">Interview Bit</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="fa-solid fa-code"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field">
+              <label class="label" for="category">Choose a Category:</label>
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-rounded">
+                  <select
+                    id="category"
+                    name="category"
+                    bind:value="{category}"
+                    required
+                  >
+                    <option value="array">Array</option>
+                    <option value="string">String</option>
+                    <option value="two_pointers">Two Pointers</option>
+                    <option value="sliding_window">Sliding Window</option>
+                    <option value="stack">Stack</option>
+                    <option value="binary_search">Binary Search</option>
+                    <option value="linked_list">Linked List</option>
+                    <option value="tree">Tree</option>
+                    <option value="heap">Heap / Priority Queue</option>
+                    <option value="backtracking">Backtracking</option>
+                    <option value="graph">Graph</option>
+                    <option value="string">String</option>
+                    <option value="dp">Dynamic Programming</option>
+                    <option value="greedy">Greedy</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="fa-solid fa-list"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="id">Problem ID:</label>
+          <div class="control">
+            <input
+              class="input is-primary is-rounded"
+              id="id"
+              name="id"
+              type="text"
+              placeholder="Enter Problem ID"
+              required
+              style="width: 200px"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="link">Problem URL:</label>
+          <div class="control">
+            <input
+              class="input is-link"
+              id="link"
+              name="link"
+              type="url"
+              placeholder="Paste Problem URL"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <input
+            type="submit"
+            class="button is-primary mt-3"
+            style="width: 100px; height: 50px"
+          />
+        </div>
+      </form>
+    </main>
+
+    <!-- Main 2 Response -->
+    <main
+      class="container content box border"
+      style="background-color: #cbe4de"
+      class="mt-3"
+    >
+      <h1>Server Response</h1>
+    </main>
+
+    <footer class="footer" style="background-color: #17B7BD">
+      <div class="content has-text-centered">
+        <p>
+          Built with <i class="fa-regular fa-heart"></i> by <strong>Sourav Suvarna</strong>
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
