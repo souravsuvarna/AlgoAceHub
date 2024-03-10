@@ -4,8 +4,8 @@
   "description": "A LeetCode Random question generator based on selected category",
   "main": "index.js",
   "scripts": {
-    "start": "node backend/index.js",
-    "server": "nodemon backend/index.js"
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "author": "souravsuvarna",
   "license": "ISC",

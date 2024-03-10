@@ -4,7 +4,7 @@ const config = require("../config/config");
 const express = require("express");
 const path = require("path");
 const app = express();
-app.use(express.static(path.join(__dirname, "../frontend")));
+// app.use(express.static(path.join(__dirname, "../frontend")));
 
 //Login Credentials
 const adminCredentials = {
@@ -129,7 +129,7 @@ const getById = async (req, res) => {
           platform: record.platform, //NOTE - Added platform
           jsonArray: existingObject,
         };
-        return res.json(responseData);
+        return res.json({ jsonArray: responseData.jsonArray });
       }
     }
     //Id Not Found
@@ -184,20 +184,16 @@ const deleteById = async (req, res) => {
 
 //Admin Login Page
 const adminLoginPage = (req, res) => {
-  const filePath = path.join(
-    __dirname,
-    "../../frontend/static/admin/login.html"
+  res.sendFile(
+    path.join(__dirname, "../../frontend", "static", "admin", "login.html")
   );
-  res.sendFile(filePath);
 };
 
 //Admin Panel page
 const adminPanelPage = (req, res) => {
-  const filePath = path.join(
-    __dirname,
-    "../../frontend/static/admin/adminPanel.html"
+  res.sendFile(
+    path.join(__dirname, "../../frontend", "static", "admin", "adminPanel.html")
   );
-  res.sendFile(filePath);
 };
 
 module.exports = {

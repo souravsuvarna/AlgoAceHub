@@ -11,9 +11,9 @@ const port = process.env.PORT || 3000;
 mongoose.connect(process.env.MONGO_URI);
 
 app.use(express.json());
-app.use("/admin", require("./routes/admin"));
-app.use("/", require("./routes/api"));
-
+app.use("/admin", require("./backend/routes/admin"));
+app.use("/", require("./backend/routes/api"));
+app.use(express.static('frontend'));
 
 //NOTE - Added
 app.use((req, res) => {
