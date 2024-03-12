@@ -109,13 +109,6 @@ const handleChange = (event) => {
   toggleFieldDisabled("link", !linkFlag);
 };
 
-const displayServerResponse = (data) => {
-  const serverResponseElement = document.getElementById("server-response");
-
-  serverResponseElement.innerHTML = "";
-
-  serverResponseElement.innerHTML = JSON.stringify(data);
-};
 
 //Handle admin db interaction
 const adminDBHandler = async (requestBody) => {
@@ -138,9 +131,9 @@ const adminDBHandler = async (requestBody) => {
     }
 
     const data = await response.json();
-    console.log("API Response:", data);
+    // console.log("API Response:", data); //NOTE - Test Pass
     displayServerResponse(data);
-    
+
     if (response.ok) {
       console.log("Request success");
     } else {
@@ -195,4 +188,62 @@ const handleSubmit = (event) => {
   }
   // console.log(adminData); //NOTE - Test Pass
   adminDBHandler(adminData);
+};
+
+//Server Response Div handle
+const displayServerResponse = (jsonResponse) => {
+  document.getElementById("server-response").innerHTML = ""; //To clear the div every time it show
+  document.getElementById("server-response-main").style.visibility = "visible"; //by default server-main is hidden
+  var serverResponseDiv = document.getElementById("server-response");
+  if (jsonResponse.error) {
+    serverResponseDiv.innerHTML = jsonResponse.error;
+  } else if (jsonResponse.message) {
+    serverResponseDiv.innerHTML = jsonResponse.message;
+  } else {
+    if (Array.isArray(jsonResponse.jsonArray)) {
+      // Loop through the array and display key and value for each object
+      jsonResponse.jsonArray.forEach(function (item) {
+        if (item.key && item.value) {
+          var key = item.key;
+          var value = item.value;
+
+          // Display key and value in the div
+          serverResponseDiv.innerHTML +=
+            "<p>ID: " +
+            key +
+            "</p><p>URL: <a href='" +
+            value +
+            "' target='_blank'>" +
+            value +
+            "</a></p><hr>";
+        }
+      });
+    } else {
+      // Handle the case when "jsonArray" is not an array (only one row)
+      if (
+        jsonResponse.jsonArray &&
+        jsonResponse.jsonArray.key &&
+        jsonResponse.jsonArray.value
+      ) {
+        var key = jsonResponse.jsonArray.key;
+        var value = jsonResponse.jsonArray.value;
+
+        // Display key and value in the div
+        serverResponseDiv.innerHTML =
+          "<p>ID: " +
+          key +
+          "</p><p>URL: <a href='" +
+          value +
+          "' target='_blank'>" +
+          value +
+          "</a></p>";
+      }
+    }
+  }
+};
+
+//Handle clear button onclick,by hiding server response main
+const hideServerMain = () => {
+  document.getElementById("server-response").innerHTML = "";
+  document.getElementById("server-response-main").style.visibility = "hidden";
 };

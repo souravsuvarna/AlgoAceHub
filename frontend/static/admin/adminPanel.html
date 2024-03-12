@@ -157,6 +157,13 @@
             class="button is-primary mt-3"
             style="width: 100px; height: 50px"
           />
+          <input
+            type="button"
+            class="button is-danger mt-3"
+            style="width: 100px; height: 50px"
+            value="Clear"
+            onclick="hideServerMain()"
+          />
         </div>
       </form>
     </main>
@@ -164,7 +171,8 @@
     <!-- Main 2 Response -->
     <main
       class="container content box border"
-      style="background-color: #cbe4de"
+      id="server-response-main"
+      style="background-color: #cbe4de; visibility: hidden;"
       class="mt-3"
     >
       <h1>Server Response</h1>
