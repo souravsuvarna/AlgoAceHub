@@ -6,9 +6,9 @@ const { getProblem, stats, home } = require("../controllers/userController");
 router.get("/", home);
 
 //Route to random problem genearte
-router.post("/getProblem", getProblem);
+router.post("/api/getProblem", getProblem);
 
 //Route to get stats
-router.get("/stats", stats);
+router.get("/api/stats", stats);
 
 module.exports = router;

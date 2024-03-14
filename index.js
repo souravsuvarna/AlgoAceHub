@@ -13,12 +13,12 @@ mongoose.connect(process.env.MONGO_URI);
 app.use(express.json());
 app.use("/admin", require("./backend/routes/admin"));
 app.use("/", require("./backend/routes/api"));
-app.use(express.static('frontend'));
+app.use(express.static("frontend"));
 
 //NOTE - Added
 app.use((req, res) => {
   // Redirect to the root ("/") for any unmatched route
-  res.redirect('/');
+  res.redirect("/");
 });
 
 app.listen(port, () => {
