@@ -17,24 +17,25 @@
     <style>
       /* Customize tab link hover color */
       .tabs li.is-active a {
-        background-color: #65f0f0; /* Active tab link background color */
-        color: #0b0c0c; /* Active tab link text color */
+        background-color: #087cfa !important;
+        color: #ffffff; /* Active tab link text color */
       }
 
       .tabs li:not(.is-active) a:hover {
-        background-color: #ff5733; /* Tab link hover background color */
-        color: #ffffff; /* Tab link hover text color */
+        background-color: #121212; /* Tab link hover background color */
+        color: #087cfa; /* Tab link hover text color */
+      }
+      .tabs.is-centered.is-large ul li.is-active a {
+        border-bottom-color: #1100ff;
+        border-bottom-width: 1px;
       }
     </style>
   </head>
 
-  <body>
-    <section class="hero" style="background-color: #283030">
-      <nav
-        class="navbar is-fixed-top"
-        role="navigation"
-        aria-label="main navigation"
-      >
+  <body style="background-color: #1e1e1e">
+    <!-- Hero -->
+    <section class="hero" style="background-color: #121212">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item">
             <h1>Logo</h1>
@@ -80,11 +81,8 @@
         </div>
       </div>
     </section>
-
-    <div
-      class="tabs is-centered is-boxed is-large"
-      style="background-color: #ffb000"
-    >
+    <!-- Tabs -->
+    <div class="tabs is-centered is-large" style="background-color: #121212">
       <ul>
         <li class="is-active">
           <a onclick="toggleActiveClass(event, 'tab1')">
@@ -105,11 +103,16 @@
       </ul>
     </div>
 
-    <div class="has-text-centered" id="stats"></div>
-    <div class="has-text-centered" style="margin-top: 20px; margin-left: 3%; margin-bottom: 3%; margin-right: 3%;">
+    <!-- Stat Body -->
+    <div
+      class="has-text-centered"
+      style="margin: 10% ;margin-top:3%; margin-bottom: 3%; background-color: #121212"
+    >
       <div class="has-text-centered" id="chart-container"></div>
     </div>
-    <footer class="footer" style="background-color: #283030">
+
+    <!-- Footer -->
+    <footer class="footer" style="background-color: #087cfa">
       <div class="content has-text-centered">
         <p>Made with Love</p>
       </div>

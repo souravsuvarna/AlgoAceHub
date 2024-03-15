@@ -1,12 +1,21 @@
 const createBarChart = (data) => {
   // Extract labels and values for the chart
-  const labels = data.map((item) => item.platform);
+  const labels = data.map((item) => {
+    if (item.platform === "lc") {
+      return "Leetcode";
+    } else if (item.platform === "gfg") {
+      return "GFG";
+    } else if (item.platform === "cn") {
+      return "Coding ninjas";
+    }
+    return "InterviewBit";
+  });
   const values = data.map((item) => item.totalProblems);
 
   // Create canvas element for the chart
   const canvas = document.createElement("canvas");
-  canvas.style.width = "10px"; // Set canvas width
-  canvas.style.height = "100px";
+  canvas.style.width = "100px"; // Set canvas width
+  canvas.style.height = "150px";
   const ctx = canvas.getContext("2d");
 
   // Create bar chart using Chart.js
@@ -19,12 +28,24 @@ const createBarChart = (data) => {
           label: "Total Problems",
           data: values,
           backgroundColor: [
-            "red",
-            "blue",
-            "green",
-            "yellow",
-            "orange", // Add more colors if needed
+            "rgba(255, 99, 132, 0.2)",
+            "rgba(255, 159, 64, 0.2)",
+            "rgba(255, 205, 86, 0.2)",
+            "rgba(75, 192, 192, 0.2)",
+            "rgba(54, 162, 235, 0.2)",
+            "rgba(153, 102, 255, 0.2)",
+            "rgba(201, 203, 207, 0.2)",
           ],
+          borderColor: [
+            "rgb(255, 99, 132)",
+            "rgb(255, 159, 64)",
+            "rgb(255, 205, 86)",
+            "rgb(75, 192, 192)",
+            "rgb(54, 162, 235)",
+            "rgb(153, 102, 255)",
+            "rgb(201, 203, 207)",
+          ],
+          borderWidth: 1,
         },
       ],
     },
