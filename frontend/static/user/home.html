@@ -15,65 +15,82 @@
       href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css"
     />
     <style>
-      /* Customize tab link hover color */
-      .tabs li.is-active a {
-        background-color: #087cfa !important;
-        color: #ffffff; /* Active tab link text color */
+      .navbar {
+        background-color: #121212;
+      }
+      .navbar-item:hover {
+        background-color: #121212 !important; /* Change the background color on hover */
+        color: #087cfa !important; /* Change the text color on hover */
       }
 
-      .tabs li:not(.is-active) a:hover {
-        background-color: #121212; /* Tab link hover background color */
-        color: #087cfa; /* Tab link hover text color */
-      }
-      .tabs.is-centered.is-large ul li.is-active a {
-        border-bottom-color: #1100ff;
-        border-bottom-width: 1px;
+      .footer {
+        padding: 1rem 2rem;
       }
     </style>
   </head>
 
-  <body style="background-color: #1e1e1e">
-    <!-- Hero -->
-    <section class="hero" style="background-color: #121212">
-      <nav class="navbar" role="navigation" aria-label="main navigation">
+  <body style="background-color: #121212">
+    <!-- Nav Bar -->
+    <div class="bd-example is-paddingless">
+      <nav class="navbar">
         <div class="navbar-brand">
-          <a class="navbar-item">
-            <h1>Logo</h1>
+          <a class="navbar-item" href="https://bulma.io">
+            <img
+              src="https://bulma.io/images/bulma-logo-white.png"
+              alt="Bulma: a modern CSS framework based on Flexbox"
+              width="112"
+              height="28"
+            />
           </a>
+          <div class="navbar-burger" data-target="navMenuColorblack-example">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
         </div>
 
-        <div class="navbar-menu">
+        <div id="navMenuColorblack-example" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item" onclick="toggleActiveClass(event, 'home');">
+              <span><i class="fa-solid fa-house"></i> Home</span>
+            </a>
+            <a class="navbar-item" onclick="toggleActiveClass(event, 'stats');">
+              <span><i class="fa-solid fa-chart-column"></i> Stats</span>
+            </a>
+          </div>
+
           <div class="navbar-end">
-            <a
-              class="navbar-item m-2"
-              href="#"
-              style="
-                color: white;
-                background-color: #434343;
-                border-top: 3px;
-                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              "
-            >
-              About
-            </a>
-            <a
-              class="navbar-item m-2"
-              href="#"
-              style="background-color: white; border-radius: 8px"
-            >
-              <span><i class="fa-brands fa-github"></i> GitHub</span>
-            </a>
+            <div class="navbar-item">
+              <a class="navbar-item">
+                <span>About</span>
+              </a>
+              <div class="field is-grouped">
+                <p class="control">
+                  <button class="button is-info is-outlined" type="reset">
+                    <span>GitHub</span>
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                  </button>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" style="background-color: #121212">
       <div class="hero-body">
         <div class="has-text-centered">
           <p
             class="title"
             style="
-              font-family: 'Courier New', Courier, monospace;
-              font-size: 60px;
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+              font-size: 40px;
               color: white;
+              margin-top: 2%;
             "
           >
             Pick One <i class="fa-solid fa-code"></i>
@@ -81,34 +98,143 @@
         </div>
       </div>
     </section>
-    <!-- Tabs -->
-    <div class="tabs is-centered is-large" style="background-color: #121212">
-      <ul>
-        <li class="is-active">
-          <a onclick="toggleActiveClass(event, 'tab1')">
-            <span class="icon is-small"
-              ><i class="fas fa-image" aria-hidden="true"></i
-            ></span>
-            <span>Problems</span>
-          </a>
-        </li>
-        <li>
-          <a onclick="toggleActiveClass(event, 'tab2'); displayStat()">
-            <span class="icon is-small"
-              ><i class="fas fa-music" aria-hidden="true"></i
-            ></span>
-            <span>Stats</span>
-          </a>
-        </li>
-      </ul>
-    </div>
 
     <!-- Stat Body -->
     <div
+      id="statBody"
       class="has-text-centered"
-      style="margin: 10% ;margin-top:3%; margin-bottom: 3%; background-color: #121212"
+      style="
+        margin: 10%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+        background-color: #1e1e1e;
+      "
     >
       <div class="has-text-centered" id="chart-container"></div>
+    </div>
+
+    <!-- Problem Filter Body -->
+    <div
+      class="container content box border"
+      id="probFilterBody"
+      style="background-color: #141414"
+    >
+      <h1
+        class="title has-text-centered ml-3 mb-5 px-1"
+        style="font-size: 35px; font-weight: bold; color: #ffffff"
+      >
+        Ask Me
+      </h1>
+      <form onsubmit="handleProblemFilter(event)">
+        <div class="columns m-5">
+          <div class="column is-4">
+            <div class="field">
+              <label class="label" for="platform" style="color: #087cfa"
+                >Choose a Platform:</label
+              >
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-rounded">
+                  <select id="platform" name="platform" required>
+                    <option value="lc">LeetCode</option>
+                    <option value="gfg">GFG</option>
+                    <option value="cn">Coding Ninja</option>
+                    <option value="ib">Interview Bit</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="fa-solid fa-code"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="column is-4">
+            <div class="field">
+              <label class="label" for="category" style="color: #087cfa"
+                >Choose a Category:</label
+              >
+              <div class="control has-icons-left">
+                <div class="select is-fullwidth is-rounded">
+                  <select
+                    id="category"
+                    name="category"
+                    bind:value="{category}"
+                    required
+                  >
+                    <option value="all">All</option>
+                    <option value="array">Array</option>
+                    <option value="string">String</option>
+                    <option value="two_pointers">Two Pointers</option>
+                    <option value="sliding_window">Sliding Window</option>
+                    <option value="stack">Stack</option>
+                    <option value="binary_search">Binary Search</option>
+                    <option value="linked_list">Linked List</option>
+                    <option value="tree">Tree</option>
+                    <option value="heap">Heap / Priority Queue</option>
+                    <option value="backtracking">Backtracking</option>
+                    <option value="graph">Graph</option>
+                    <option value="string">String</option>
+                    <option value="dp">Dynamic Programming</option>
+                    <option value="greedy">Greedy</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="fa-solid fa-list"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="field m-1 mt-5">
+              <button class="button is-primary is-outlined" type="submit">
+                <span>Choose</span>
+                <span class="icon is-small">
+                  <i class="fa-solid fa-hand-pointer"></i>
+                </span>
+              </button>
+              <button
+                class="button is-danger is-outlined"
+                type="reset"
+                onclick="hideServerResponse()"
+              >
+                <span>Reset</span>
+                <span class="icon is-small">
+                  <i class="fa-solid fa-rotate-right"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <!-- Server Response -->
+      <div
+        class="columns is-centered"
+        id="server-response"
+        style="display: none"
+      >
+        <div class="column has-text-centered">
+          <p id="message" style="color: white"></p>
+          <button
+            class="button is-link"
+            id="problem-link-button"
+            onclick="gotoProblemPage()"
+          >
+            Solve Me
+          </button>
+        </div>
+      </div>
+
+      <!-- Not Found -->
+      <div class="columns is-centered" id="notFound" style="display: none">
+        <div class="column has-text-centered">
+          <p style="color: red">
+            No matching results found. We're updating our database for more
+            meaningful problems. Please check back later
+          </p>
+        </div>
+      </div>
     </div>
 
     <!-- Footer -->

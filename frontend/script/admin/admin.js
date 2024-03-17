@@ -109,7 +109,6 @@ const handleChange = (event) => {
   toggleFieldDisabled("link", !linkFlag);
 };
 
-
 //Handle admin db interaction
 const adminDBHandler = async (requestBody) => {
   try {
@@ -193,11 +192,13 @@ const handleSubmit = (event) => {
 //Server Response Div handle
 const displayServerResponse = (jsonResponse) => {
   document.getElementById("server-response").innerHTML = ""; //To clear the div every time it show
-  document.getElementById("server-response-main").style.visibility = "visible"; //by default server-main is hidden
+  document.getElementById("server-response-main").style.display = "block"; //by default server-main is hidden
   var serverResponseDiv = document.getElementById("server-response");
   if (jsonResponse.error) {
+    serverResponseDiv.style.color = "white";
     serverResponseDiv.innerHTML = jsonResponse.error;
   } else if (jsonResponse.message) {
+    serverResponseDiv.style.color = "white";
     serverResponseDiv.innerHTML = jsonResponse.message;
   } else {
     if (Array.isArray(jsonResponse.jsonArray)) {
@@ -209,9 +210,9 @@ const displayServerResponse = (jsonResponse) => {
 
           // Display key and value in the div
           serverResponseDiv.innerHTML +=
-            "<p>ID: " +
+            `<p style="color:#fff">ID: ` +
             key +
-            "</p><p>URL: <a href='" +
+            `</p><p style="color:#fff">URL: <a href='` +
             value +
             "' target='_blank'>" +
             value +
@@ -230,9 +231,9 @@ const displayServerResponse = (jsonResponse) => {
 
         // Display key and value in the div
         serverResponseDiv.innerHTML =
-          "<p>ID: " +
+          `<p style="color:#fff">ID: ` +
           key +
-          "</p><p>URL: <a href='" +
+          `</p><p style="color:#fff">URL: <a href='` +
           value +
           "' target='_blank'>" +
           value +
@@ -245,5 +246,5 @@ const displayServerResponse = (jsonResponse) => {
 //Handle clear button onclick,by hiding server response main
 const hideServerMain = () => {
   document.getElementById("server-response").innerHTML = "";
-  document.getElementById("server-response-main").style.visibility = "hidden";
+  document.getElementById("server-response-main").style.display = "none";
 };

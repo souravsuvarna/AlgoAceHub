@@ -40,23 +40,26 @@
   </head>
   <body>
     <section class="hero is-primary is-fullheight">
-      <div class="hero-body" style="background-color: #2c3333">
+      <div class="hero-body" style="background-color: #121212">
         <div class="container">
           <div class="columns is-centered">
             <div class="column is-5-tablet is-4-desktop is-3-widescreen">
               <form
                 action=""
                 class="box"
-                style="background-color: #cbe4de"
+                style="background-color: #1e1e1e"
                 onsubmit="handleLogin(event)"
               >
                 <span class="icon-text">
                   <span class="icon">
-                    <i class="fa-solid fa-arrow-right-to-bracket fa-2x"></i>
+                    <i
+                      class="fa-solid fa-arrow-right-to-bracket fa-2x"
+                      style="color: white"
+                    ></i>
                   </span>
                   <span
                     class="ml-3 mb-5 px-1"
-                    style="font-size: 35px; font-weight: bold; color: #2e4f4f"
+                    style="font-size: 35px; font-weight: bold; color: #087cfa"
                     >Admin</span
                   >
                 </span>
@@ -64,7 +67,7 @@
                   <label
                     for="adminId"
                     class="label"
-                    style="font-size: 20px; color: #2e4f4f"
+                    style="font-size: 20px; color: #dadada"
                     >ID</label
                   >
                   <div class="control has-icons-left">
@@ -84,7 +87,7 @@
                   <label
                     for="adminPassword"
                     class="label"
-                    style="font-size: 20px; color: #2e4f4f"
+                    style="font-size: 20px; color: #dadada"
                     >Password</label
                   >
                   <div class="control has-icons-left">
@@ -107,7 +110,10 @@
                     </span>
                     <span>Login</span>
                   </button>
-                  <span id="loginSpinner" class="bulma-loader-mixin mt-3 ml-2"></span>
+                  <span
+                    id="loginSpinner"
+                    class="bulma-loader-mixin mt-3 ml-2"
+                  ></span>
                   <p id="loginStatus" style="color: red; visibility: hidden">
                     Login failed. Please check your credentials.
                   </p>

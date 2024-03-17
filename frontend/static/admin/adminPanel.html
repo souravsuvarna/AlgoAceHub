@@ -15,12 +15,12 @@
     <script src="../../script/admin/admin.js"></script>
   </head>
   <!-- Header -->
-  <section class="hero" style="background-color: #2c3333">
+  <section class="hero" style="background-color: #121212">
     <div class="hero-body has-text-centered">
       <h1
         class="title"
         class="ml-3 mb-5 px-1"
-        style="font-size: 50px; font-weight: bold; color: #17b7bd"
+        style="font-size: 50px; font-weight: bold; color: #087cfa"
       >
         Welcome, Admin
       </h1>
@@ -28,16 +28,16 @@
   </section>
 
   <!-- Body -->
-  <div style="background-color: #2c3333">
+  <div style="background-color: #121212">
     <main
       class="container content box border"
-      style="background-color: #cbe4de"
+      style="background-color: #1e1e1e"
       class="mt-3"
     >
       <h1
-        class="title"
-        class="ml-3 mb-5 px-1"
-        style="font-size: 35px; font-weight: bold; color: #2c3333"
+        class="title has-text-centered"
+        class="mb-5 px-1"
+        style="font-size: 35px; font-weight: bold; color: #fff"
       >
         Admin Panel
       </h1>
@@ -46,7 +46,9 @@
         <div class="columns">
           <div class="column">
             <div class="field">
-              <label class="label" for="method">Choose one:</label>
+              <label class="label" style="color: #00ffaa" for="method"
+                >Choose one:</label
+              >
               <div class="control has-icons-left">
                 <div class="select is-fullwidth is-rounded">
                   <select
@@ -70,7 +72,9 @@
 
           <div class="column">
             <div class="field">
-              <label class="label" for="platform">Choose a Platform:</label>
+              <label class="label" for="platform" style="color: #00ffaa"
+                >Choose a Platform:</label
+              >
               <div class="control has-icons-left">
                 <div class="select is-fullwidth is-rounded">
                   <select id="platform" name="platform" required>
@@ -89,7 +93,9 @@
 
           <div class="column">
             <div class="field">
-              <label class="label" for="category">Choose a Category:</label>
+              <label class="label" for="category" style="color: #00ffaa"
+                >Choose a Category:</label
+              >
               <div class="control has-icons-left">
                 <div class="select is-fullwidth is-rounded">
                   <select
@@ -123,7 +129,9 @@
         </div>
 
         <div class="field">
-          <label class="label" for="id">Problem ID:</label>
+          <label class="label" for="id" style="color: #fffb00"
+            >Problem ID:</label
+          >
           <div class="control">
             <input
               class="input is-primary is-rounded"
@@ -138,7 +146,9 @@
         </div>
 
         <div class="field">
-          <label class="label" for="link">Problem URL:</label>
+          <label class="label" for="link" style="color: #ff6fc8"
+            >Problem URL:</label
+          >
           <div class="control">
             <input
               class="input is-link"
@@ -172,13 +182,11 @@
     <main
       class="container content box border"
       id="server-response-main"
-      style="background-color: #cbe4de; visibility: hidden;"
+      style="background-color: #1e1e1e; display: none"
       class="mt-3"
     >
-      <h1>Server Response</h1>
-      <div id="server-response">
-        
-      </div>
+      <h1 style="color: #fff;" class="title has-text-centered">Server Response</h1>
+      <div id="server-response"></div>
     </main>
 
     <!-- Logout -->
@@ -190,7 +198,7 @@
   </div>
 
   <!-- Footer -->
-  <footer class="footer" style="background-color: #17b7bd">
+  <footer class="footer" style="background-color: #087cfa">
     <div class="content has-text-centered">
       <p>
         Built with <i class="fa-regular fa-heart"></i> by

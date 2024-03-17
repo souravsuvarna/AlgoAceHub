@@ -61,6 +61,7 @@ const createBarChart = (data) => {
   }
 };
 
+// Display db stats
 const serverStats = async () => {
   try {
     const response = await fetch("/api/stats", {
@@ -87,24 +88,87 @@ const serverStats = async () => {
   }
 };
 
+const gotoProblemPage = () => {
+  let dynamicURL = document.getElementById("problem-link-button").href;
+  console.log(dynamicURL);
+  window.open(dynamicURL, "_blank");
+};
+
+//Hide serverResponse div
+const hideServerResponse = () => {
+  document.getElementById("server-response").style.display = "none";
+  document.getElementById("notFound").style.display = "none";
+};
+
+//Problem filter form submission
+const handleProblemFilter = async (event) => {
+  event.preventDefault();
+  hideServerResponse();
+  const platform = document.getElementById("platform").value;
+  const category = document.getElementById("category").value;
+  const requestBody = {
+    platform,
+    category,
+  };
+  try {
+    const response = await fetch(`/api/getProblem`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      document.getElementById("notFound").style.display = "block";
+      console.error("Request failed with status:", response.status);
+      throw new Error("Sever Error, Try Again");
+    } else {
+      const data = await response.json();
+      const totalRecords = data.totalRecords;
+      const problemUrl = data.data.value;
+      document.getElementById("server-response").style.display = "block";
+      document.getElementById(
+        "message"
+      ).innerHTML = `Picked one for you out of ${totalRecords} filtered results..!`;
+      document.getElementById("problem-link-button").href = problemUrl;
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+// Handling Tabs
 function toggleActiveClass(event, tabId) {
   event.preventDefault(); // Prevent the default action of the anchor tag
-
-  var tabs = document.querySelectorAll(".tabs ul li"); // Get all li elements
-
-  // Loop through all li elements and remove the 'is-active' class
-  tabs.forEach(function (tab) {
-    tab.classList.remove("is-active");
-  });
-
-  // Add the 'is-active' class to the clicked li element
-  event.currentTarget.closest("li").classList.add("is-active");
-
-  // Here you can add code to show/hide the corresponding tab content based on tabId
-  if (tabId == "tab2") {
+  document.getElementById("chart-container").innerHTML = "";
+  if (tabId == "stats") {
+    document.getElementById("probFilterBody").style.display = "none";
     serverStats();
+    document.getElementById("chart-container").style.display = "block";
   } else {
-    document.getElementById("chart-container").innerHTML = "";
-    document.getElementById("stats").innerHTML = "";
+    document.getElementById("chart-container").style.display = "none";
+    document.getElementById("probFilterBody").style.display = "block";
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Get all "navbar-burger" elements
+  const $navbarBurgers = Array.prototype.slice.call(
+    document.querySelectorAll(".navbar-burger"),
+    0
+  );
+
+  // Add a click event on each of them
+  $navbarBurgers.forEach((el) => {
+    el.addEventListener("click", () => {
+      // Get the target from the "data-target" attribute
+      const target = el.dataset.target;
+      const $target = document.getElementById(target);
+
+      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+      el.classList.toggle("is-active");
+      $target.classList.toggle("is-active");
+    });
+  });
+});
