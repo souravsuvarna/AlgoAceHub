@@ -171,7 +171,7 @@ const deleteById = async (req, res) => {
         { "jsonArray.key": recordId },
         { $pull: { jsonArray: { key: recordId } } }
       );
-      return res.json({ message: "Success" });
+      return res.json({ message: "Delete Successful" });
     } catch (error) {
       console.error("Error deleting object:", error);
       return res.status(500).json({ message: "Internal Server Error" });
@@ -191,6 +191,11 @@ const adminLoginPage = (req, res) => {
 
 //Admin Panel page
 const adminPanelPage = (req, res) => {
+  // Set cache control headers
+  res.setHeader(
+    "Cache-Control",
+    "no-store, no-cache, must-revalidate, private"
+  );
   res.sendFile(
     path.join(__dirname, "../../frontend", "static", "admin", "adminPanel.html")
   );

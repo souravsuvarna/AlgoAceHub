@@ -164,12 +164,12 @@
         <div class="field">
           <input
             type="submit"
-            class="button is-primary mt-3"
+            class="button is-primary is-outlined mt-3"
             style="width: 100px; height: 50px"
           />
           <input
             type="button"
-            class="button is-danger mt-3 ml-0"
+            class="button is-danger is-outlined mt-3 ml-0"
             style="width: 100px; height: 50px"
             value="Clear"
             onclick="hideServerMain()"
@@ -178,6 +178,15 @@
       </form>
     </main>
 
+  <!-- Admin Panel Spinner -->
+    <div class="columns is-centered" id="adminSpinner" style="display: none">
+      <div class="column is-half has-text-centered">
+        <span class="icon is-large is-size-3" style="color: #485fc6">
+          <i class="fas fa-spinner fa-spin"></i>
+        </span>
+      </div>
+    </div>
+
     <!-- Main 2 Response -->
     <main
       class="container content box border"
@@ -185,7 +194,9 @@
       style="background-color: #1e1e1e; display: none"
       class="mt-3"
     >
-      <h1 style="color: #fff;" class="title has-text-centered">Server Response</h1>
+      <h1 style="color: #fff" class="title has-text-centered">
+        Server Response
+      </h1>
       <div id="server-response"></div>
     </main>
 

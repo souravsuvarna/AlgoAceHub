@@ -1,7 +1,7 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
 const app = express();
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, "../frontend")));
 
 const MainModel = require("../model/problemSchema");
 
@@ -36,6 +36,7 @@ const getProblem = async (req, res) => {
     const recordSize = existingRecord.length;
     const recordRandomIndex = Math.floor(Math.random() * recordSize);
 
+
     // Extract relevant data from the record
     const responseData = {
       jsonArray: existingRecord[recordRandomIndex].jsonArray,
@@ -44,6 +45,12 @@ const getProblem = async (req, res) => {
     // Get Random Index of jsonArray
     const size = responseData.jsonArray.length;
     const randomIndex = size > 0 ? Math.floor(Math.random() * size) : 0;
+
+    //If size of jsonArray is zero
+    //FIXME - No need to handle this , bcs in db all document will have atleast 1 array
+    if (size === 0) {
+      return res.status(404).json({ error: "Try Again" });
+    }
 
     // Send the retrieved data as a JSON response
     res.json({
@@ -95,7 +102,7 @@ const stats = async (req, res) => {
 
 //Route to get home Page
 const home = (req, res) => {
-  const filePath = path.join(__dirname, '../../frontend/static/user/home.html');
+  const filePath = path.join(__dirname, "../../frontend/static/user/home.html");
   res.sendFile(filePath);
 };
 

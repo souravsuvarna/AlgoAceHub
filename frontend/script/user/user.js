@@ -63,6 +63,7 @@ const createBarChart = (data) => {
 
 // Display db stats
 const serverStats = async () => {
+  document.getElementById("statSpinner").style.display = "flex";
   try {
     const response = await fetch("/api/stats", {
       method: "GET",
@@ -85,6 +86,8 @@ const serverStats = async () => {
     }
   } catch (error) {
     console.error(error.message);
+  } finally {
+    document.getElementById("statSpinner").style.display = "none";
   }
 };
 
@@ -103,6 +106,8 @@ const hideServerResponse = () => {
 //Problem filter form submission
 const handleProblemFilter = async (event) => {
   event.preventDefault();
+  window.scrollBy(0, 100);
+  document.getElementById("spinner").style.display = "flex";
   hideServerResponse();
   const platform = document.getElementById("platform").value;
   const category = document.getElementById("category").value;
@@ -125,8 +130,11 @@ const handleProblemFilter = async (event) => {
       throw new Error("Sever Error, Try Again");
     } else {
       const data = await response.json();
+      console.log(data);
       const totalRecords = data.totalRecords;
       const problemUrl = data.data.value;
+      console.log(problemUrl);
+      console.log(totalRecords);
       document.getElementById("server-response").style.display = "block";
       document.getElementById(
         "message"
@@ -135,6 +143,8 @@ const handleProblemFilter = async (event) => {
     }
   } catch (error) {
     console.log(error.message);
+  } finally {
+    document.getElementById("spinner").style.display = "none";
   }
 };
 

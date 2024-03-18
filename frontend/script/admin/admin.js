@@ -111,6 +111,7 @@ const handleChange = (event) => {
 
 //Handle admin db interaction
 const adminDBHandler = async (requestBody) => {
+  document.getElementById("adminSpinner").style.display = "flex";
   try {
     const requestMethodName = requestBody.requestMethod;
     const endpointName = requestBody.endpoint;
@@ -141,6 +142,7 @@ const adminDBHandler = async (requestBody) => {
   } catch (error) {
     console.error("Error:", error.message);
   } finally {
+    document.getElementById("adminSpinner").style.display = "none";
   }
 };
 
