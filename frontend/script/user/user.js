@@ -25,7 +25,7 @@ const createBarChart = (data) => {
       labels: labels,
       datasets: [
         {
-          label: "Total Problems",
+          label: "Total Problems (Live)",
           data: values,
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",

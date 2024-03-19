@@ -21,6 +21,10 @@
       href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=New+Rocker&display=swap"
+      rel="stylesheet"
+    />
     <style>
       .navbar {
         background-color: #121212;
@@ -144,6 +148,10 @@
         alt="GIF Image"
         class="is-small mt-5"
       />
+      <p style="color: #dddddd">
+        " Stay <span style="font-family: 'New Rocker', system-ui">L</span>ight,
+        Code Right "
+      </p>
     </div>
 
     <!-- Stat Body -->
@@ -181,11 +189,20 @@
               >
               <div class="control has-icons-left">
                 <div class="select is-fullwidth is-rounded">
-                  <select id="platform" name="platform" required>
-                    <option value="lc">LeetCode</option>
-                    <option value="gfg">GFG</option>
-                    <option value="cn">Coding Ninja</option>
-                    <option value="ib">Interview Bit</option>
+                  <select
+                    id="platform"
+                    name="platform"
+                    style="background-color: #121212; color: #ffffff"
+                    required
+                  >
+                    <option value="lc" style="color: #fbc02d">LeetCode</option>
+                    <option value="gfg" style="color: #21c048">GFG</option>
+                    <option value="cn" style="color: #f66c3b">
+                      Coding Ninja
+                    </option>
+                    <option value="ib" style="color: #0097a0">
+                      Interview Bit
+                    </option>
                   </select>
                 </div>
                 <span class="icon is-left">
@@ -211,7 +228,7 @@
                   <select
                     id="category"
                     name="category"
-                    bind:value="{category}"
+                    style="background-color: #121212; color: white"
                     required
                   >
                     <option value="all">All</option>
@@ -332,24 +349,27 @@
         style="
           font-family: 'Helvetica Narrow', 'Arial Narrow', Tahoma, Arial,
             Helvetica, sans-serif;
-          text-align: justify;
+          text-align:center;
           color: rgb(211, 211, 211);
           letter-spacing: 1px;
-          word-spacing: 1px;
+          
         "
       >
         AlgoAceHub is a platform that helps improve your coding skills with
         carefully selected challenges from top platforms like LeetCode, GFG,
-        Coding Ninjas, and InterviewBit across various categories. It helps you
-        practice effectively and refine your skills, empowering you to succeed
-        in problem-solving.
+        Coding Ninjas, and InterviewBit across various categories. Our platform
+        is continuously updated with new worth solving challenges, empowering
+        you to practice efficiently and refine your problem-solving skills.
       </p>
     </div>
 
     <!-- Footer -->
-    <footer class="footer" style="background-color: #343a40">
+    <footer class="footer" style="background-color: #1e1e1e">
       <div class="content has-text-centered">
-        <p>Made with Love</p>
+        <span style="color: white">&copy;AlgoAceHub 2024</span><br />
+        <span style="color: white; opacity: 0.5; font-size: 0.8rem"
+          >All rights reserved.</span
+        >
       </div>
     </footer>
   </body>
