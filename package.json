@@ -1,7 +1,7 @@
 {
-  "name": "backend",
+  "name": "algo-ace-hub",
   "version": "1.0.0",
-  "description": "A LeetCode Random question generator based on selected category",
+  "description": "Random coding challenge generator based on selected category",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
